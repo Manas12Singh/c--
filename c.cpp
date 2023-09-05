@@ -1,13 +1,34 @@
 #include <iostream>
-
 using namespace std;
+
+class rev
+{
+    public:
+    int n;
+    int rev=0;
+    void input()
+    {
+        cin >> n;
+    }
+    void backward()
+    {
+        int ldigit=n;
+        while(ldigit>0)
+        {
+            rev=rev*10+ldigit;
+        }
+    }
+    void display()
+    {
+        cout << rev;
+    }
+};
 
 int main()
 {
-    float a, b, avg;
-    cout << "Enter two numbers: ";
-    cin >> a >> b;
-    avg = (a + b) / 2;
-    cout << "Average is: " << avg << endl;
+    rev obj;
+    obj.input();
+    obj.backward();
+    obj.display();
     return 0;
 }
