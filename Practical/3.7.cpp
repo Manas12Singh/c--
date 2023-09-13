@@ -3,10 +3,12 @@ using namespace std;
 
 double power(double m, int n = 2)
 {
-    if (n == 1)
-        return m;
-    else
+    if (n == 0)
+        return 1;
+    else if (n>0)
         return m * power(m, n - 1);
+    else
+        return power(m, n + 1) / m;
 }
 
 int main()
