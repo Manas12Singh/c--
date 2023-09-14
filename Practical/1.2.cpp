@@ -11,10 +11,10 @@ int main()
     {
         cout << "Enter Subject " << i << " Marks: ";
         cin >> mark;
-        total = total + mark;
+        total += mark;
     }
     maxMark *= 6;
-    percent = (double)total / maxMark * 100;
+    percent = ((double)total) / maxMark * 100;
     cout << "Total Marks: " << total << "/" << maxMark << endl;
     cout << "Percentage: " << percent << "%" << endl;
 }

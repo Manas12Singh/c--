@@ -1,35 +1,68 @@
 #include <iostream>
-#include <cmath>
-
 using namespace std;
 
-void calculateArea(int length, int breadth)
+double area(double base, double height)
 {
-    cout << "Area of Rectangle: " << length * breadth << endl;
+    return 0.5 * base * height;
+}
+
+float area(float length, float breadth)
+{
+    return length * breadth;
+}
+
+double area(double radius)
+{
+    return 3.14 * radius * radius;
+}
+
+float area(float side)
+{
+    return side * side;
 }
 
 int main()
 {
     int choice;
-
-    do
+    cout << "Options: " << endl
+         << "1. Area of Triangle" << endl
+         << "2. Area of Circle" << endl
+         << "3. Area of Rectangle" << endl
+         << "4. Area of Square" << endl;
+    cout << "Enter your choice: ";
+    cin >> choice;
+    switch (choice)
     {
-        cout << "Options: " << endl
-             << "1. Area of Triangle" << endl
-             << "2. Area of Circle" << endl
-             << "3. Area of Rectangle" << endl
-             << "4. Area of Square" << endl
-             << "5. Exit" << endl;
-        cout << "Enter your choice: ";
-        cin >> choice;
-        switch (choice)
-        {
-        case 1:
-            break;
-        
-        default:
-            break;
-        }
-    } while (choice != 5);
+    case 1:
+        double base, height;
+        cout << "Enter base: ";
+        cin >> base;
+        cout << "Enter height: ";
+        cin >> height;
+        cout << "Area: " << area(base, height) << endl;
+        break;
+    case 2:
+        double radius;
+        cout << "Enter radius: ";
+        cin >> radius;
+        cout << "Area: " << area(radius) << endl;
+        break;
+    case 3:
+        float length, breadth;
+        cout << "Enter length: ";
+        cin >> length;
+        cout << "Enter breadth: ";
+        cin >> breadth;
+        cout << "Area: " << area(length, breadth) << endl;
+        break;
+    case 4:
+        float side;
+        cout << "Enter side: ";
+        cin >> side;
+        cout << "Area: " << area(side) << endl;
+        break;
+    default:
+        cout << "Invalid choice." << endl;
+    }
     return 0;
 }
