@@ -12,11 +12,7 @@ void reverse(int *arr, int end)
 {
     int start = 0;
     while (start < end)
-    {
-        swap(&arr[start], &arr[end]);
-        start++;
-        end--;
-    }
+        swap(&arr[start++], &arr[end--]);
 }
 
 int main()

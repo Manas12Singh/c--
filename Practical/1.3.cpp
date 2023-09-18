@@ -9,18 +9,23 @@ int DigitsCont(int n)
     return 1 + DigitsCont(n / 10);
 }
 
-int main()
+bool isArmstrong(int n)
 {
-    int num, sum = 0, noOfDigits, temp;
-    cout << "Enter a number: ";
-    cin >> num;
-    noOfDigits = DigitsCont(num);
-    temp = num;
+    int sum = 0, noOfDigits, temp = n;
+    noOfDigits = DigitsCont(n);
     while (temp != 0)
     {
         sum += pow(temp % 10, noOfDigits);
         temp /= 10;
     }
-    cout << num << (sum == num ? " is an Armstrong number." : " is not an Armstrong number.") << endl;
+    return n == sum;
+}
+
+int main()
+{
+    int num;
+    cout << "Enter a number: ";
+    cin >> num;
+    cout << num << (isArmstrong(num) ? " is an Armstrong number." : " is not an Armstrong number.") << endl;
     return 0;
 }
