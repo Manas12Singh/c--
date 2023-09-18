@@ -28,7 +28,7 @@ int main()
     cout << "Enter the elements: ";
     for (int i = 0; i < n; i++)
         cin >> arr[i];
-    cout << "Enter the number to position to be rotate: ";
+    cout << "Enter the number of position to be rotate: ";
     cin >> k;
     reverse(arr, n - 1);
     reverse(arr, k % n - 1);

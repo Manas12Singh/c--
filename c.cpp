@@ -1,34 +1,14 @@
 #include <iostream>
 using namespace std;
 
-class rev
-{
-    public:
-    int n;
-    int rev=0;
-    void input()
-    {
-        cin >> n;
-    }
-    void backward()
-    {
-        int ldigit=n;
-        while(ldigit>0)
-        {
-            rev=rev*10+ldigit;
-        }
-    }
-    void display()
-    {
-        cout << rev;
-    }
-};
-
 int main()
 {
-    rev obj;
-    obj.input();
-    obj.backward();
-    obj.display();
+    int a = 5, b = 3;
+    cout << "a&b=" << (a & b) << endl;
+    cout << "a|b=" << (a | b) << endl;
+    cout << "a^b=" << (a ^ b) << endl;
+    cout << "~a=" << (~a) << endl;
+    cout << "b<<1=" << (b << 1) << endl;
+    cout << "b>>2=" << (b >> 2) << endl;
     return 0;
 }

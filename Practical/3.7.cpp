@@ -5,7 +5,7 @@ double power(double m, int n = 2)
 {
     if (n == 0)
         return 1;
-    else if (n>0)
+    else if (n > 0)
         return m * power(m, n - 1);
     else
         return power(m, n + 1) / m;
@@ -19,6 +19,6 @@ int main()
     cin >> m;
     cout << "Enter n: ";
     cin >> n;
-    cout << "Result: " << power(m, n) << endl;
+    cout << "power(m,n): " << power(m, n) << endl;
     return 0;
 }

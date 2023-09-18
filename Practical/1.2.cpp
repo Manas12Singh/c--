@@ -17,4 +17,5 @@ int main()
     percent = ((double)total) / maxMark * 100;
     cout << "Total Marks: " << total << "/" << maxMark << endl;
     cout << "Percentage: " << percent << "%" << endl;
+    cout << "Status: " << (percent >= 33 ? "Pass" : "Fail") << endl;
 }

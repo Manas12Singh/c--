@@ -39,13 +39,13 @@ int main()
         cin >> base;
         cout << "Enter height: ";
         cin >> height;
-        cout << "Area: " << area(base, height) << endl;
+        cout << "Area: " << area(base, height) << " sq. units" << endl;
         break;
     case 2:
         double radius;
         cout << "Enter radius: ";
         cin >> radius;
-        cout << "Area: " << area(radius) << endl;
+        cout << "Area: " << area(radius) << " sq. units" << endl;
         break;
     case 3:
         float length, breadth;
@@ -53,13 +53,13 @@ int main()
         cin >> length;
         cout << "Enter breadth: ";
         cin >> breadth;
-        cout << "Area: " << area(length, breadth) << endl;
+        cout << "Area: " << area(length, breadth) << " sq. units" << endl;
         break;
     case 4:
         float side;
         cout << "Enter side: ";
         cin >> side;
-        cout << "Area: " << area(side) << endl;
+        cout << "Area: " << area(side) << " sq. units" << endl;
         break;
     default:
         cout << "Invalid choice." << endl;
