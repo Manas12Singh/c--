@@ -1,0 +1,11 @@
+wacppp to create an object of a class and access clas attributes such as Student roll no., name, and percentage
+
+wacppp to implement the constant member function by using the keyword constant
+
+wacppp to create a class point having X and Y axis with getter and setter function
+
+wacppp to create a class to read and add two distances
+
+1 of the objective of oop is to seperate the details of imp
+
+wap to show the use of inline keyword and write downt he restriction o
