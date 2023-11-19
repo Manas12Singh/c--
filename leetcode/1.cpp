@@ -1,29 +1,57 @@
 #include <iostream>
 #include <cstring>
+#include <vector>
 #include <algorithm>
+#include <queue>
+#include <stack>
+#include <deque>
+
 using namespace std;
+
+struct TreeNode
+{
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
 
 class Solution
 {
 public:
-    string addBinary(string a, string b)
+    bool isVowel(char a)
     {
-        int l1 = a.length() - 1;
-        int l2 = b.length() - 1;
-        int c = 0;
-        string sum;
-        while (l1 >= 0 || l2 >= 0 || c > 0)
+        switch (a)
         {
-            int d = c;
-            if (l1 >= 0)
-                d += a[l1--] - '0';
-            if (l2 >= 0)
-                d += b[l2--] - '0';
-            c = d / 2;
-            d %= 2;
-            sum.push_back(d + '0');
+        case 'a':
+        case 'e':
+        case 'i':
+        case 'o':
+        case 'u':
+            return true;
+        default:
+            return false;
         }
-        reverse(sum.begin(), sum.end());
-        return sum;
+    }
+    string reverseVowels(string s)
+    {
+        int i = 0, j = s.length() - 1;
+        while (i < j)
+        {
+            if (!isVowel(s[i]))
+            {
+                i++;
+                continue;
+            }
+            if (!isVowel(s[j]))
+            {
+                j--;
+                continue;
+            }
+            swap(s[i], s[j]);
+        }
+        
     }
 };
