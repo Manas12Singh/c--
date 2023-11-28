@@ -3,7 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <map>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 struct ListNode
@@ -42,4 +42,6 @@ public:
 
 int main()
 {
+    for (int i = 1; i < 10000000; i *= 3)
+        cout << (bitset<16>)i << endl;
 }

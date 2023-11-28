@@ -5,7 +5,7 @@
 #include <queue>
 #include <stack>
 #include <deque>
-
+#include <stdint.h>
 using namespace std;
 
 struct TreeNode
@@ -18,40 +18,23 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+struct ListNode
+{
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
 class Solution
 {
 public:
-    bool isVowel(char a)
+    vector<vector<int>> insert(vector<vector<int>> &intervals, vector<int> &newInterval)
     {
-        switch (a)
+        for (int i = 0; i < intervals.size(); i++)
         {
-        case 'a':
-        case 'e':
-        case 'i':
-        case 'o':
-        case 'u':
-            return true;
-        default:
-            return false;
+            
         }
-    }
-    string reverseVowels(string s)
-    {
-        int i = 0, j = s.length() - 1;
-        while (i < j)
-        {
-            if (!isVowel(s[i]))
-            {
-                i++;
-                continue;
-            }
-            if (!isVowel(s[j]))
-            {
-                j--;
-                continue;
-            }
-            swap(s[i], s[j]);
-        }
-        
     }
 };
