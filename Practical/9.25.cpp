@@ -1,12 +1,10 @@
 #include <iostream>
 using namespace std;
-
 class Stack
 {
 private:
     int data[2];
     int top;
-
 public:
     class FULL
     {
@@ -14,9 +12,7 @@ public:
     class EMPTY
     {
     };
-
     Stack() : top(-1) {}
-
     void push(int value)
     {
         if (top >= 1)
@@ -25,7 +21,6 @@ public:
         }
         data[++top] = value;
     }
-
     int pop()
     {
         if (top < 0)
@@ -35,12 +30,10 @@ public:
         return data[top--];
     }
 };
-
 int main()
 {
     Stack s;
     int choice, value;
-
     do
     {
         try
@@ -51,7 +44,6 @@ int main()
             cout << "3. Exit\n";
             cout << "Enter your choice: ";
             cin >> choice;
-
             switch (choice)
             {
             case 1:
@@ -60,20 +52,16 @@ int main()
                 s.push(value);
                 cout << "Value pushed successfully.\n";
                 break;
-
             case 2:
                 cout << "Popped value: " << s.pop() << endl;
                 break;
-
             case 3:
                 cout << "Exiting program.\n";
                 break;
-
             default:
                 cout << "Invalid choice. Please try again.\n";
                 break;
             }
-
             cout << endl;
         }
         catch (const Stack::FULL)
@@ -85,6 +73,5 @@ int main()
             cerr << "Error: Stack is empty.\n";
         }
     } while (choice != 3);
-
     return 0;
 }
