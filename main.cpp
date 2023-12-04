@@ -23,25 +23,36 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
+
 class Solution
 {
 public:
-    vector<vector<int>> mergeSimilarItems(vector<vector<int>> &items1, vector<vector<int>> &items2)
+    void reorderList(ListNode *head)
     {
-        map<int, int> a;
-        vector<vector<int>> res;
-        for (auto &&i : items1)
-            a[i[0]] = i[1];
-        for (auto &&i : items2)
-            a[i[0]] += i[1];
-        for (auto &&i : a)
-            res.push_back(vector<int>{i.first, i.second});
-        return res;
+        if (head->next == nullptr || head->next->next == nullptr)
+            return;
+        ListNode *p1 = head, *p2 = head;
+        while (p2->next != nullptr && p2->next->next != nullptr)
+        {
+            p1 = p1->next;
+            p2 = p2->next->next;
+        }
+        p2 = nullptr;
+        while (p1->next != nullptr)
+        {
+            ListNode *temp = p1->next;
+            p1->next = p1->next->next;
+            temp->next = p2;
+            p2 = temp;
+        }
+        p1 = head;
+        while (p2 != nullptr)
+        {
+            ListNode *temp = p2;
+            p2 = p2->next;
+            temp->next = p1->next;
+            p1->next = temp;
+            p1 = p1->next->next;
+        }
     }
 };
-
-int main()
-{
-    for (int i = 1; i < 10000000; i *= 3)
-        cout << (bitset<16>)i << endl;
-}

@@ -4,12 +4,10 @@ using namespace std;
 class List
 {
     vector<int> arr;
-
 public:
     friend void operator<<(ostream &, List &);
     friend void operator>>(istream &, List &);
 };
-
 void operator<<(ostream &st, List &l)
 {
     for (auto &&i : l.arr)

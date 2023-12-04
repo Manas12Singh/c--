@@ -1,7 +1,5 @@
 #include <iostream>
-
 using namespace std;
-
 string operator+(string &a, string &b)
 {
     string res;
@@ -11,7 +9,6 @@ string operator+(string &a, string &b)
         res.push_back(i);
     return res;
 }
-
 int main()
 {
     string s1, s2, s3;

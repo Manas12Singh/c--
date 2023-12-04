@@ -30,11 +30,10 @@ struct ListNode
 class Solution
 {
 public:
-    vector<vector<int>> insert(vector<vector<int>> &intervals, vector<int> &newInterval)
+    ListNode *reverseBetween(ListNode *head, int left, int right)
     {
-        for (int i = 0; i < intervals.size(); i++)
-        {
-            
-        }
+        if (head == NULL)
+            return nullptr;
+        
     }
 };

@@ -4,7 +4,6 @@ class Toolbooth
 {
     unsigned noOfCars;
     double moneyCollected;
-
 public:
     Toolbooth() : noOfCars(0), moneyCollected(0) {}
     void payingCar()
