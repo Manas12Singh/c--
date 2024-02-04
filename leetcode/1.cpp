@@ -6,6 +6,10 @@
 #include <stack>
 #include <deque>
 #include <stdint.h>
+#include <map>
+#include <set>
+#include <random>
+#include <string>
 using namespace std;
 
 struct TreeNode
@@ -27,13 +31,78 @@ struct ListNode
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-class Solution
+class Node
 {
 public:
-    ListNode *reverseBetween(ListNode *head, int left, int right)
+    int val;
+    vector<Node *> children;
+
+    Node() {}
+
+    Node(int _val)
     {
-        if (head == NULL)
-            return nullptr;
-        
+        val = _val;
+    }
+
+    Node(int _val, vector<Node *> _children)
+    {
+        val = _val;
+        children = _children;
     }
 };
+
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        int i = 0, j = 0, l = -1, r = -1;
+        int n = 0;
+        map<char, int> m;
+
+        for (auto &ch : t) {
+            if (m[ch] == 0) {
+                n++;
+                m[ch] = 1;
+            } else {
+                m[ch]++;
+            }
+        }
+
+        while (i < s.size() && j < s.size()) {
+            if (n == 0) {
+                if (l == -1 || (r - l > j - i)) {
+                    r = j;
+                    l = i;
+                }
+                if (m[s[i]] != 0) {
+                    if (m[s[i]] == 0) {
+                        n++;
+                    }
+                    m[s[i]]++;
+                }
+                i++;
+            } else {
+                if (m[s[j]] != 0) {
+                    m[s[j]]--;
+                    if (m[s[j]] == 0) {
+                        n--;
+                    }
+                }
+                j++;
+            }
+        }
+
+        if (l == -1) {
+            return "";
+        }
+        return s.substr(l, r - l + 1);
+    }
+};
+
+int main() {
+    Solution solution;
+    string s = "ADOBECODEBANC";
+    string t = "ABC";
+    cout << solution.minWindow(s, t) << endl;
+
+    return 0;
+}
