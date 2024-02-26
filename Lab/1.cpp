@@ -81,6 +81,22 @@ void bubbleSort(int nums[], int i, int n)
         bubbleSort(nums, 0, n - 1);
 }
 
+void selectionSort(int nums[], int i, int j, int &k, int n)
+{
+    if (i == n || j == n)
+        return;
+    if (nums[j] < nums[k])
+        k = j;
+    selectionSort(nums, i, j + 1, k, n);
+    if (i == j)
+    {
+        if (i != k)
+            swap(nums[i], nums[k]);
+        k = i + 1;
+        selectionSort(nums, k, k, k, n);
+    }
+}
+
 int main()
 {
     int t;
@@ -100,7 +116,8 @@ int main()
         // c = frequencySearch(nums, target, n);
         //  cout << "No of comparisons: " << c << endl;
         // cout << "Frequency: " << c << endl;
-        bubbleSort(nums, 0, n);
+        int k = 0;
+        selectionSort(nums, 0, 0, k, n);
         cout << "Sorted array: ";
         for (auto &i : nums)
             cout << i << " ";
@@ -110,3 +127,5 @@ int main()
 }
 
 // given a sorted array of +ve integers containing few duplicate elements design an algorithm and implement it using a program to find whether the key element is present in an array or not. if present, then find the no of copies of the given key.
+
+// given an array of non-integers. design an algo and program to count number of pair of integer such that their diff is equal to a given key
