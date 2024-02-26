@@ -7,9 +7,11 @@
 #include <deque>
 #include <stdint.h>
 #include <map>
+#include <unordered_map>
 #include <set>
 #include <random>
 #include <string>
+#include <list>
 using namespace std;
 
 struct TreeNode
@@ -51,58 +53,14 @@ public:
     }
 };
 
-class Solution {
+class Solution
+{
 public:
-    string minWindow(string s, string t) {
-        int i = 0, j = 0, l = -1, r = -1;
-        int n = 0;
-        map<char, int> m;
-
-        for (auto &ch : t) {
-            if (m[ch] == 0) {
-                n++;
-                m[ch] = 1;
-            } else {
-                m[ch]++;
-            }
-        }
-
-        while (i < s.size() && j < s.size()) {
-            if (n == 0) {
-                if (l == -1 || (r - l > j - i)) {
-                    r = j;
-                    l = i;
-                }
-                if (m[s[i]] != 0) {
-                    if (m[s[i]] == 0) {
-                        n++;
-                    }
-                    m[s[i]]++;
-                }
-                i++;
-            } else {
-                if (m[s[j]] != 0) {
-                    m[s[j]]--;
-                    if (m[s[j]] == 0) {
-                        n--;
-                    }
-                }
-                j++;
-            }
-        }
-
-        if (l == -1) {
-            return "";
-        }
-        return s.substr(l, r - l + 1);
+    int sumNumbers(TreeNode *root)
+    {
     }
 };
 
-int main() {
-    Solution solution;
-    string s = "ADOBECODEBANC";
-    string t = "ABC";
-    cout << solution.minWindow(s, t) << endl;
-
-    return 0;
-}
+/*
+2 * nums[i] > nums[i+1]
+*/
