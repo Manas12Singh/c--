@@ -9,7 +9,6 @@
 #include <QFileDialog>
 #include <QStringList>
 
-
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);

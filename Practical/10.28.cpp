@@ -1,10 +1,11 @@
 #include <iostream>
 using namespace std;
-template <typename T, int size>
-T findMax(T (&arr)[size])
+template <typename T>
+T findMax(T arr[])
 {
+    int n = size(arr);
     T max = arr[0];
-    for (int i = 1; i < size; i++)
+    for (int i = 1; i < n; i++) 
     {
         if (arr[i] > max)
         {

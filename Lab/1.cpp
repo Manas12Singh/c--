@@ -7,7 +7,7 @@ int linearSearch(int nums[], int target, int i, int n)
     if (i == n)
     {
         cout << "Not found" << endl;
-        return 0;
+        return i;
     }
     if (nums[i] == target)
     {
@@ -111,10 +111,10 @@ int main()
         cout << "Enter the elements: ";
         for (int i = 0; i < n; i++)
             cin >> nums[i];
-        // cout << "Enter target: ";
-        // cin >> target;
-        // c = frequencySearch(nums, target, n);
-        //  cout << "No of comparisons: " << c << endl;
+        cout << "Enter target: ";
+        cin >> target;
+        c = frequencySearch(nums, target, n);
+        cout << "No of comparisons: " << c << endl;
         // cout << "Frequency: " << c << endl;
         int k = 0;
         selectionSort(nums, 0, 0, k, n);
@@ -128,4 +128,6 @@ int main()
 
 // given a sorted array of +ve integers containing few duplicate elements design an algorithm and implement it using a program to find whether the key element is present in an array or not. if present, then find the no of copies of the given key.
 
-// given an array of non-integers. design an algo and program to count number of pair of integer such that their diff is equal to a given key
+// given an array of non-negative integers. design an algo and program to count number of pair of integer such that their diff is equal to a given key
+
+// find wether given key element is present in an array or not, also find number of compariosons for each input case. O(n)
