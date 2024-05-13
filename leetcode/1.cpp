@@ -7,15 +7,15 @@
 using namespace std;
 
 struct TreeNode {
-    int val;
+    int count;
     TreeNode *left;
     TreeNode *right;
 
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode() : count(0), left(nullptr), right(nullptr) {}
 
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : count(x), left(nullptr), right(nullptr) {}
 
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : count(x), left(left), right(right) {}
 };
 
 struct ListNode {
@@ -32,19 +32,19 @@ struct ListNode {
 /* class Node
 {
 public:
-    int val;
+    int count;
     vector<Node *> children;
 
     Node() {}
 
     Node(int _val)
     {
-        val = _val;
+        count = _val;
     }
 
     Node(int _val, vector<Node *> _children)
     {
-        val = _val;
+        count = _val;
         children = _children;
     }
 }; */
@@ -52,21 +52,21 @@ public:
 /* class Node
 {
 public:
-    int val;
+    int count;
     vector<Node *> neighbors;
     Node()
     {
-        val = 0;
+        count = 0;
         neighbors = vector<Node *>();
     }
     Node(int _val)
     {
-        val = _val;
+        count = _val;
         neighbors = vector<Node *>();
     }
     Node(int _val, vector<Node *> _neighbors)
     {
-        val = _val;
+        count = _val;
         neighbors = _neighbors;
     }
 }; */
@@ -74,64 +74,25 @@ public:
 /* class Node
 {
 public:
-    int val;
+    int count;
     Node *left;
     Node *right;
     Node *next;
 
-    Node() : val(0), left(NULL), right(NULL), next(NULL) {}
+    Node() : count(0), left(NULL), right(NULL), next(NULL) {}
 
-    Node(int _val) : val(_val), left(NULL), right(NULL), next(NULL) {}
+    Node(int _val) : count(_val), left(NULL), right(NULL), next(NULL) {}
 
     Node(int _val, Node *_left, Node *_right, Node *_next)
-        : val(_val), left(_left), right(_right), next(_next) {}
+        : count(_val), left(_left), right(_right), next(_next) {}
 }; */
 
 class Solution {
-    void heapify(vector<int> &heap, vector<int> &score, int index, int n) {
-        int minIndex = index;
-        if (index * 2 + 1 < n && score[heap[minIndex]] > score[heap[index * 2 + 1]])
-            minIndex = index * 2 + 1;
-        if (index * 2 + 2 < n && score[heap[minIndex]] > score[heap[index * 2 + 2]])
-            minIndex = index * 2 + 2;
-        if (index != minIndex) {
-            swap(heap[index], heap[minIndex]);
-            heapify(heap, score, minIndex, n);
-        }
-    }
-
-    void buildHeap(vector<int> &heap, vector<int> &score) {
-        int n = heap.size();
-        for (int i = n / 2; i > -1; i--)
-            heapify(heap, score, i, n);
-    }
-
 public:
-    vector<string> findRelativeRanks(vector<int> &score) {
-        int n = score.size();
-        vector<int> heap(n);
-        for (int i = 0; i < n; i++)
-            heap[i] = i;
-        buildHeap(heap, score);
-        vector<string> res(n);
-        for (int i = 0; i < n; i++) {
-            switch (i) {
-                case 0:
-                    res[heap[0]] = "Gold Medal";
-                    break;
-                case 1:
-                    res[heap[0]] = "Silver Medal";
-                    break;
-                case 2:
-                    res[heap[0]] = "Bronze Medal";
-                    break;
-                default:
-                    res[heap[0]] = to_string(i + 1);
-            }
-            swap(heap[0], heap[n - i - 1]);
-            heapify(heap, score, 0, n - i - 2);
-        }
-        return res;
+    vector<vector<int>> largestLocal(vector<vector<int>> &grid) {
+        int m = grid.size();
+        vector<vector<int>> res(m-2, vector<int>(n-2));
+
     }
 };
 
