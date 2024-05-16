@@ -89,9 +89,7 @@ public:
 
 class Solution {
 public:
-    vector<vector<int>> largestLocal(vector<vector<int>> &grid) {
-        int m = grid.size();
-        vector<vector<int>> res(m-2, vector<int>(n-2));
+    int maximumSafenessFactor(vector<vector<int>>& grid) {
 
     }
 };
