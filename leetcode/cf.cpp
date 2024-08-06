@@ -1,13 +1,19 @@
 #include <iostream>
+#include <bits/stdc++.h>
+
 using namespace std;
 
 int main()
 {
-    int t, n = 0;
+    int t;
     cin >> t;
-    while (t-- > 0)
+    while (t--)
     {
-        int k;
+        int n;
+        cin >> n;
+        int co = n / 4;
+        int ch = (n % 4) / 2;
+        cout << n / 4 + (n % 4) / 2 << endl;
     }
     return 0;
 }

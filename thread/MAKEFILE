@@ -1,0 +1,16 @@
+#target: dependency
+#	command
+
+a.exe: BigInteger.o main.o
+	gcc -o a BigInteger.o check.o
+	make clean
+	a
+
+x86_64.0: x86_64.s
+	nasm
+
+BigInteger.o: BigInteger.c
+	gcc -c BigInteger.c
+
+clean:
+	del BigInteger.o main.o

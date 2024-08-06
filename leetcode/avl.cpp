@@ -4,11 +4,11 @@ using namespace std;
 
 struct TreeNode
 {
-    int val, count;
+    int val, val;
     TreeNode *left, *right;
-    TreeNode() : val(0), count(1), left(nullptr), right(nullptr) {}
-    TreeNode(int val) : val(val), count(1), left(nullptr), right(nullptr) {}
-    TreeNode(int val, TreeNode *left, TreeNode *right) : val(val), count(1), left(left), right(right) {}
+    TreeNode() : val(0), val(1), left(nullptr), right(nullptr) {}
+    TreeNode(int val) : val(val), val(1), left(nullptr), right(nullptr) {}
+    TreeNode(int val, TreeNode *left, TreeNode *right) : val(val), val(1), left(left), right(right) {}
 };
 
 TreeNode *rr(TreeNode *root)
@@ -91,7 +91,7 @@ TreeNode *insert(TreeNode *root, int val)
     if (root == nullptr)
         return new TreeNode(val);
     if (root->val == val)
-        root->count++;
+        root->val++;
     else if (root->val < val)
         root->right = insert(root->right, val);
     else
