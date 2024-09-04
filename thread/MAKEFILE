@@ -7,7 +7,7 @@ a.exe: BigInteger.o main.o
 	a
 
 x86_64.0: x86_64.s
-	nasm
+	nasm x86_64.s
 
 BigInteger.o: BigInteger.c
 	gcc -c BigInteger.c

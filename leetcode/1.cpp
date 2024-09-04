@@ -132,53 +132,51 @@ public:
 
 class Solution
 {
-    int res;
-    int helper(TreeNode *root)
-    {
-        if (root->left == nullptr && root->right == nullptr)
-            return 0;
-        int l = helper(root->left);
-        int r = helper(root->right);
-        if (root->left == nullptr)
-        {
-            if (r == 0)
-            {
-                res++;
-                return 2;
-            }
-            else
-                r - 1;
-        }
-        if (root->right == nullptr)
-        {
-            if (l == 0)
-            {
-                res++;
-                return 2;
-            }
-            else
-                return l - 1;
-        }
-        if (min(l, r) == 0)
-        {
-            res++;
-            return 2;
-        }
-        return max(l, r) - 1;
-    }
-
 public:
-    int minCameraCover(TreeNode *root)
+    unordered_map<int, int> m;
+    vector<int> parent;
+    vector<int> size;
+    int findP(int i)
     {
-        res = 0;
-        if (helper(root) == 0)
-            res++;
+        if (i != parent[i])
+            parent[i] = findP(parent[i]);
+        return parent[i];
+    }
+    void Union(int a, int b)
+    {
+        a = findP(a);
+        b = findP(b);
+        if (a != b)
+        {
+            if (size[a] > size[b])
+                size[a] += size[b], parent[b] = a;
+            else
+                size[b] += size[a], parent[a] = b;
+        }
+    }
+    int longestConsecutive(vector<int> &nums)
+    {
+        int n = nums.size();
+        parent.assign(n, 0);
+        size.assign(n, 1);
+        for (int i = 0; i < n; i++)
+            m[nums[i]] = parent[i] = i;
+        for (int &i : nums)
+        {
+            if (m.find(i + 1) != m.end())
+                Union(m[i], m[i + 1]);
+            if (m.find(i - 1) != m.end())
+                Union(m[i], m[i - 1]);
+        }
+        int res = 0;
+        for (auto &i : size)
+            res = max(i, res);
         return res;
     }
 };
 
 int main()
 {
-    Solution s();
+    Solution s;
     return 0;
 }
