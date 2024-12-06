@@ -1,4 +1,3 @@
-#include <bits/stdc++.h>
 #include <iostream>
 #include <cstring>
 #include <algorithm>
@@ -133,50 +132,35 @@ public:
 class Solution
 {
 public:
-    unordered_map<int, int> m;
-    vector<int> parent;
-    vector<int> size;
-    int findP(int i)
+    int countUnguarded(int m, int n, vector<vector<int>> &guards, vector<vector<int>> &walls)
     {
-        if (i != parent[i])
-            parent[i] = findP(parent[i]);
-        return parent[i];
-    }
-    void Union(int a, int b)
-    {
-        a = findP(a);
-        b = findP(b);
-        if (a != b)
+        vector<vector<int>> res(m, vector<int>(n, 0));
+        for (auto guard : guards)
+            res[guard[0]][guard[1]] = 1;
+        for (auto wall : walls)
+            res[wall[0]][wall[1]] = -1;
+        for (int i = 0; i < m; i++)
         {
-            if (size[a] > size[b])
-                size[a] += size[b], parent[b] = a;
-            else
-                size[b] += size[a], parent[a] = b;
+            int t = 0;
+            for (int j = 0; j < n; j++)
+            {
+                if (res[i][j] == -1)
+                {
+                    res[i][j] = t;
+                    t = 0;
+                }
+                if (res[i][j] == 1)
+                    t = 1;
+            }
         }
-    }
-    int longestConsecutive(vector<int> &nums)
-    {
-        int n = nums.size();
-        parent.assign(n, 0);
-        size.assign(n, 1);
-        for (int i = 0; i < n; i++)
-            m[nums[i]] = parent[i] = i;
-        for (int &i : nums)
-        {
-            if (m.find(i + 1) != m.end())
-                Union(m[i], m[i + 1]);
-            if (m.find(i - 1) != m.end())
-                Union(m[i], m[i - 1]);
-        }
-        int res = 0;
-        for (auto &i : size)
-            res = max(i, res);
-        return res;
     }
 };
 
 int main()
 {
     Solution s;
+    vector<int> cost = {4, 3, 2, 5, 6, 7, 2, 5, 5};
+    int target = 9;
+    cout << s.largestNumber(cost, target) << endl;
     return 0;
 }
