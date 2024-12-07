@@ -9,7 +9,7 @@ class PageReplacement {
 public:
     PageReplacement(int memorySize) : memorySize(memorySize), pageFaults(0) {}
 
-    int fifo(const vector<int>& pages) {
+    void fifo(const vector<int>& pages) {
         queue<int> memory;
         unordered_set<int> s;
         cout << "Page Faults: ";
@@ -26,7 +26,7 @@ public:
                 cout << page << " ";
             }
         }
-        return pageFaults;
+        cout << "\nNo of Page Faults: " << pageFaults << endl;
     }
 
 private:
@@ -45,6 +45,6 @@ int main() {
         cin >> pages[i];
 
     PageReplacement pr(memorySize);
-    cout << "\nNo of Page Faults: " << pr.fifo(pages) << endl;
+    pr.fifo(pages);
     return 0;
 }
