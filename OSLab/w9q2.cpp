@@ -50,35 +50,26 @@ int main() {
         cin >> noOfBlocks;
 
         File file(name, start, noOfBlocks);
-        while (true) {
-            file.block = nullptr;
-            DiskBlock** temp = &file.block;
-            bool valid = true;
-            cout << "Enter blocks for file " << i + 1 << ": ";
-            for (int j = 0; j < noOfBlocks; j++) {
-                int block;
-                cin >> block;
-                if (block >= MAX_BLOCKS || assignedBlocks[block]) {
-                    valid = false;
-                    break;
-                }
-
-                assignedBlocks[block] = true;
-                *temp = new DiskBlock(block);
-                temp = &((*temp)->next);
-            }
-            if (valid)
-                break;
-            else {
+        file.block = nullptr;
+        DiskBlock** temp = &file.block;
+        bool valid = true;
+        int j = 0;
+        while (j < noOfBlocks) {
+            int block;
+            cout << "Enter block " << j + 1 << " for file " << i + 1 << ": ";
+            cin >> block;
+            if (block >= MAX_BLOCKS || assignedBlocks[block]) {
+                valid = false;
                 cout << "Invalid block allocation for file " << name << ".\n";
-                while (file.block) {
-                    DiskBlock* temp = file.block;
-                    file.block = file.block->next;
-                    assignedBlocks[temp->blockNo] = false;
-                    delete temp;
-                }
+                continue;
             }
+
+            assignedBlocks[block] = true;
+            *temp = new DiskBlock(block);
+            temp = &((*temp)->next);
+            j++;
         }
+
         files.push_back(file);
         cout << "\n";
     }

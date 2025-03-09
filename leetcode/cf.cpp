@@ -1,27 +1,22 @@
-#include <iostream>
 #include <bits/stdc++.h>
+
 using namespace std;
 
 int main()
 {
     int t;
+    char c;
     cin >> t;
-    vector<int> nums(t);
-    for (int &i : nums)
-        cin >> i;
-    int s = 0;
-    for (int &i : nums)
-        s += i;
-    int res = 0;
-    for (int i = 0; i < t; i++)
+    while (t--)
     {
-        int k = s;
-        for (int j = i; j < t; j++)
-        {
-            k += (nums[j]) ? -1 : 1;
-            res = max(res, k);
-        }
+        int sum = 0;
+        for (int i = 0; i < 10; i++)
+            for (int j = 0; j < 10; j++)
+            {
+                cin >> c;
+                if (c == 'X')
+                    sum += max((10 - i - 1) % 5, (10 - j - 1) % 5) + 1;
+            }
     }
-    cout << res << endl;
     return 0;
 }

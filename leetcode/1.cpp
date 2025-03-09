@@ -1,8 +1,4 @@
-#include <iostream>
-#include <cstring>
-#include <algorithm>
 #include <bits/stdc++.h>
-#include <ctime>
 
 using namespace std;
 
@@ -95,10 +91,10 @@ public:
     bool isLast;
     vector<TrieNode *> next;
 
-    TrieNode()
+    TrieNode(int n)
     {
         isLast = false;
-        next.assign(26, nullptr);
+        next.assign(n, nullptr);
     }
 };
 
@@ -129,38 +125,38 @@ public:
     ListNode(int x, int y, ListNode *next) : key(x), val(y), next(next) {}
 }; */
 
+vector<pair<int, int>> d = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
+#define isqrt(x) floor(sqrt(x))
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution
 {
 public:
-    int countUnguarded(int m, int n, vector<vector<int>> &guards, vector<vector<int>> &walls)
+    vector<int> pivotArray(vector<int> &nums, int pivot)
     {
-        vector<vector<int>> res(m, vector<int>(n, 0));
-        for (auto guard : guards)
-            res[guard[0]][guard[1]] = 1;
-        for (auto wall : walls)
-            res[wall[0]][wall[1]] = -1;
-        for (int i = 0; i < m; i++)
-        {
-            int t = 0;
-            for (int j = 0; j < n; j++)
-            {
-                if (res[i][j] == -1)
-                {
-                    res[i][j] = t;
-                    t = 0;
-                }
-                if (res[i][j] == 1)
-                    t = 1;
-            }
+        int n = nums.size();
+        int pivotIndex;
+        for (pivotIndex = 0; pivotIndex < n; pivotIndex++)
+            if (nums[pivotIndex] == pivot)
+                break;
+        swap(nums[pivotIndex], nums[n - 1]);
+        int l=0;
+        while(l<n-1){
+            
         }
     }
 };
-
 int main()
 {
-    Solution s;
-    vector<int> cost = {4, 3, 2, 5, 6, 7, 2, 5, 5};
-    int target = 9;
-    cout << s.largestNumber(cost, target) << endl;
-    return 0;
+    Solution S;
 }
