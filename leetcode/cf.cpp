@@ -8,14 +8,15 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n, k, x;
-        cin >> n >> k >> x;
-        if (k == 1)
-            cout << "NO" << endl;
-        else
+        int n;
+        cin >> n;
+        for (int i = 0; i < n; i++)
         {
-            if(k==2 && x==1 && )
+            int k;
+            cin >> k;
+            cout << n + 1 - k << " ";
         }
+        cout << endl;
     }
     return 0;
 }
