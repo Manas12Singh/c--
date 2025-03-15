@@ -2,18 +2,11 @@
 using namespace std;
 int main()
 {
-    long long n;
-    cin >> n;
-    vector<long long> a(n);
-    for (long long &i : a)
-        cin >> i;
-    long long ans = 0;
-    for (long long i = 1; i < n; i++)
+    for (int i = 0; i < 10; i++)
     {
-        if (a[i] >= a[i - 1])
-        {
-            if (sqrtl(a[i] - a[i - 1] + 3) == (long long)sqrtl(a[i] - a[i - 1] + 3))
-                ans = max(ans, (long long)sqrtl(a[i] - a[i - 1] + 3));
-        }
+        for (int j = 0; j < 10; j++)
+            cout << min(min(max(abs(5 - i), abs(5 - j)), max(abs(4 - i), abs(4 - j))), min(max(abs(5 - i), abs(4 - j)), max(abs(4 - i), abs(5 - j)))) << "\t";
+        cout << endl;
     }
+    return 0;
 }

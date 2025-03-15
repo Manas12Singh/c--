@@ -142,18 +142,29 @@ vector<pair<int, int>> d = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 class Solution
 {
 public:
-    vector<int> pivotArray(vector<int> &nums, int pivot)
+    int maximumCandies(vector<int> &candies, long long k)
     {
-        int n = nums.size();
-        int pivotIndex;
-        for (pivotIndex = 0; pivotIndex < n; pivotIndex++)
-            if (nums[pivotIndex] == pivot)
-                break;
-        swap(nums[pivotIndex], nums[n - 1]);
-        int l=0;
-        while(l<n-1){
-            
+        long long r = 0;
+        for (int i : candies)
+            r += i;
+        r /= k;
+        long long l = 0;
+        long long res = 0;
+        while (l <= r)
+        {
+            long long mid = l + (r - l) / 2;
+            int count = 0;
+            for (int i : candies)
+                count += i / mid;
+            if (count >= k)
+            {
+                res = max(res, mid);
+                l = mid + 1;
+            }
+            else
+                r = mid - 1;
         }
+        return res;
     }
 };
 int main()
