@@ -1,5 +1,8 @@
-function TreeNode(val, left, right) {
-    this.val = (val === undefined ? 0 : val)
-    this.left = (left === undefined ? null : left)
-    this.right = (right === undefined ? null : right)
-}
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isNumber = function (s) {
+    regex = /[+-]?[0-9]*(.[0-9]*(e[+-]?[0-9]*)?)?$/
+    return regex.test(s);
+};

@@ -4,19 +4,14 @@ using namespace std;
 
 int main()
 {
+    vector<vector<int>> m = {{-1, -1}, {1, -1}, {-1, 1}, {1, 1}};
     int t;
     cin >> t;
     while (t--)
     {
-        int n;
-        cin >> n;
-        for (int i = 0; i < n; i++)
-        {
-            int k;
-            cin >> k;
-            cout << n + 1 - k << " ";
-        }
-        cout << endl;
+        int a, b, xk, xq, yk, yq;
+        cin >> a >> b >> xk >> yk >> xq >> yq;
+        
     }
     return 0;
 }
