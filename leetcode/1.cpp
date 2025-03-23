@@ -144,41 +144,34 @@ public:
 
 class Solution
 {
-    vector<vector<int>> parent;
-    int findP(int i)
-    {
-        if (parent[i][0] == -1)
-            return i;
-        return parent[i][0] = findP(parent[i][0]);
-    }
-    void un(int a, int b)
-    {
-        a = findP(a);
-        b = findP(b);
-        if (a != b)
-        {
-            if (parent[a][1] > parent[b][1])
-                swap(a, b);
-            parent[b][0] = a;
-            parent[a][1] += parent[b][1];
-            parent[a][2] += parent[b][2];
-        }
-        parent[a][2]++;
-    }
-
 public:
-    int countCompleteComponents(int n, vector<vector<int>> &edges)
+    int countPaths(int n, vector<vector<int>> &roads)
     {
-        parent.resize(n, {-1, 1, 0});
-        for (auto i : edges)
-            un(i[0], i[1]);
-        int res = 0;
+        vector<long> dist(n, LONG_MAX);
+        dist[0] = 0;
+        vector<long> cnt(n, 0);
+        cnt[0] = 1;
         for (int i = 0; i < n; i++)
         {
-            if (parent[i][0] == -1 && (parent[i][1] * (parent[i][1] - 1)) / 2 == parent[i][2])
-                res++;
+            for (auto &road : roads)
+            {
+                int a = road[0];
+                int b = road[1];
+                long c = road[2];
+                if (dist[a] > dist[b])
+                    swap(a, b);
+                if (dist[a] != LONG_MAX)
+                {
+                    if (dist[a] + c < dist[b])
+                    {
+                        dist[b] = (dist[a] + c) % (long)10e12;
+                        cnt[b] = 0;
+                    }
+                    cnt[b] = (cnt[b] + cnt[a]) % (int)(10e9 + 7);
+                }
+            }
         }
-        return res;
+        return cnt[n - 1];
     }
 };
 int main()
