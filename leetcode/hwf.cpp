@@ -2,11 +2,10 @@
 using namespace std;
 int main()
 {
-    for (int j = 0; j < 10; j++)
-    {
-        for (int i = 0; i < 10; i++)
-            cout << i - 5 << "," << 5 - j << "\t";
-        cout << endl;
-    }
-    return 0;
+    int32_t n, m;
+    n = 1, m = 1;
+    int64_t ans = n;
+    ans <<= 32;
+    ans |= m;
+    cout << ans << endl;
 }

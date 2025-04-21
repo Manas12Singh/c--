@@ -145,37 +145,25 @@ public:
 class Solution
 {
 public:
-    int countPaths(int n, vector<vector<int>> &roads)
+    int numberOfArrays(vector<int> &differences, int lower, int upper)
     {
-        vector<long> dist(n, LONG_MAX);
-        dist[0] = 0;
-        vector<long> cnt(n, 0);
-        cnt[0] = 1;
-        for (int i = 0; i < n; i++)
+        int n = differences.size();
+        int res = 0;
+        int mi = lower, ma = upper;
+        for (int i = n - 1; i >= 0; i--)
         {
-            for (auto &road : roads)
-            {
-                int a = road[0];
-                int b = road[1];
-                long c = road[2];
-                if (dist[a] > dist[b])
-                    swap(a, b);
-                if (dist[a] != LONG_MAX)
-                {
-                    if (dist[a] + c < dist[b])
-                    {
-                        dist[b] = (dist[a] + c) % (long)10e12;
-                        cnt[b] = 0;
-                    }
-                    cnt[b] = (cnt[b] + cnt[a]) % (int)(10e9 + 7);
-                }
-            }
+            if (mi - differences[i] < lower)
+                mi = lower + differences[i];
+            if (ma - differences[i] > upper)
+                ma = upper - differences[i];
+            if (mi > ma)
+                return 0;
         }
-        return cnt[n - 1];
+        return ma - mi + 1;
     }
 };
 int main()
 {
-    Solution S;
+
     return 0;
 }

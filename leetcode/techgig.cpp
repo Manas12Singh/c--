@@ -1,12 +1,7 @@
 #include <iostream>
 using namespace std;
-int main(int argc, char *a[])
+int main()
 {
-    int t;
-    while (t-- > 0)
-    {
-        
-        int n;
-        cin >> 
-    }
+    int a = -1;
+    cout << a / 3 << endl;
 }
