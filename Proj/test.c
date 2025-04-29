@@ -1,7 +1,9 @@
 #include <stdio.h>
-
+#define m /* \
+wdaad*/
 int main()
 {
-    prin
+    m;
+    printf("Hello World\n");
     return 0;
 }

@@ -145,21 +145,24 @@ public:
 class Solution
 {
 public:
-    int numberOfArrays(vector<int> &differences, int lower, int upper)
+    long long countSubarrays(vector<int> &nums, int k)
     {
-        int n = differences.size();
-        int res = 0;
-        int mi = lower, ma = upper;
-        for (int i = n - 1; i >= 0; i--)
+        int n = nums.size();
+        int m = *max_element(nums.begin(), nums.end());
+        int l = 0;
+        int c = 0;
+        long long res = 0;
+        for (int r = 0; r < n; r++)
         {
-            if (mi - differences[i] < lower)
-                mi = lower + differences[i];
-            if (ma - differences[i] > upper)
-                ma = upper - differences[i];
-            if (mi > ma)
-                return 0;
+            c += nums[r] == m;
+            while (l < r && c >= k)
+            {
+                c -= nums[l] == m;
+                l++;
+            }
+            res += l;
         }
-        return ma - mi + 1;
+        return res;
     }
 };
 int main()

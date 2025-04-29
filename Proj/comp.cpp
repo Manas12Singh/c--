@@ -1,17 +1,18 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 void preProcess(string inFileName)
 {
     string outFileName = inFileName.substr(0, inFileName.length() - 2) + ".ii";
     cout << outFileName << endl;
-    FILE *inFile = fopen(inFileName.c_str(), "r");
-    FILE *outFile = fopen(outFileName.c_str(), "w");
-    char c;
-    bool isnewLine
-    while ((c = fgetc(inFile)) != EOF)
+    ifstream inFile(inFileName);
+    ofstream outFile(outFileName);
+    string line;
+    bool isComment = false;
+    while (getline(inFile, line))
     {
-
+        
     }
 }
 

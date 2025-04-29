@@ -4,27 +4,46 @@ using namespace std;
 
 struct TreeNode
 {
-    int val, val;
+    int val, height;
     TreeNode *left, *right;
-    TreeNode() : val(0), val(1), left(nullptr), right(nullptr) {}
-    TreeNode(int val) : val(val), val(1), left(nullptr), right(nullptr) {}
-    TreeNode(int val, TreeNode *left, TreeNode *right) : val(val), val(1), left(left), right(right) {}
+    TreeNode(int val) : val(val), height(1), left(nullptr), right(nullptr) {}
 };
 
-TreeNode *rr(TreeNode *root)
+int getHeight(TreeNode *node)
 {
-    TreeNode *temp = root->right;
-    root->right = root->right->left;
-    temp->left = root;
-    return temp;
+    return node ? node->height : 0;
 }
 
-TreeNode *ll(TreeNode *root)
+int getBalance(TreeNode *node)
 {
-    TreeNode *temp = root->left;
-    root->left = root->left->right;
-    temp->right = root;
-    return temp;
+    return node ? getHeight(node->left) - getHeight(node->right) : 0;
+}
+
+void updateHeight(TreeNode *node)
+{
+    node->height = 1 + max(getHeight(node->left), getHeight(node->right));
+}
+
+TreeNode *rr(TreeNode *y)
+{
+    TreeNode *x = y->right;
+    TreeNode *T2 = x->left;
+    x->left = y;
+    y->right = T2;
+    updateHeight(y);
+    updateHeight(x);
+    return x;
+}
+
+TreeNode *ll(TreeNode *y)
+{
+    TreeNode *x = y->left;
+    TreeNode *T2 = x->right;
+    x->right = y;
+    y->left = T2;
+    updateHeight(y);
+    updateHeight(x);
+    return x;
 }
 
 TreeNode *lr(TreeNode *root)
@@ -39,100 +58,59 @@ TreeNode *rl(TreeNode *root)
     return rr(root);
 }
 
-int findHeight(TreeNode *root, int &k)
+TreeNode *balance(TreeNode *node)
 {
-    k = 1;
-    if (root == nullptr)
-        return 0;
-    int lh = findHeight(root->left, k);
-    int rh = findHeight(root->right, k);
-    if (lh > rh)
+    updateHeight(node);
+    int bf = getBalance(node);
+    if (bf > 1)
     {
-        k = -1;
-        return lh + 1;
+        if (getBalance(node->left) < 0)
+            node->left = rr(node->left);
+        return ll(node);
     }
-    return rh + 1;
-}
-
-int findHeight(TreeNode *root)
-{
-    if (root == nullptr)
-        return 0;
-    return max(findHeight(root->left), findHeight(root->right)) + 1;
-}
-
-TreeNode *balance(TreeNode *root)
-{
-    if (root != nullptr)
+    if (bf < -1)
     {
-        int k1, k2;
-        int lh = findHeight(root->left, k1);
-        int rh = findHeight(root->right, k2);
-        if (lh - rh > 1)
-        {
-            if (k1 == -1)
-                root = ll(root);
-            else
-                root = lr(root);
-        }
-        else if (rh - lh > 1)
-        {
-            if (k2 == 1)
-                root = rr(root);
-            else
-                root = rl(root);
-        }
+        if (getBalance(node->right) > 0)
+            node->right = ll(node->right);
+        return rr(node);
     }
-    return root;
+    return node;
 }
 
 TreeNode *insert(TreeNode *root, int val)
 {
-    if (root == nullptr)
+    if (!root)
         return new TreeNode(val);
-    if (root->val == val)
-        root->val++;
-    else if (root->val < val)
+    if (val < root->val)
+        root->left = insert(root->left, val);
+    else if (val > root->val)
         root->right = insert(root->right, val);
     else
-        root->left = insert(root->left, val);
+        return root;
     return balance(root);
 }
 
-void printTree(TreeNode *root)
+void printBT(const string &prefix, const TreeNode *node, bool isLeft, bool hasRight)
 {
-    int h = findHeight(root), i = 0;
-    queue<TreeNode *> q[2];
-    q[0].push(root);
-    while ((!q[0].empty() || !q[1].empty()) && i < h)
+    if (node != nullptr)
     {
-        TreeNode *temp = q[i % 2].front();
-        q[i % 2].pop();
-        if (temp == nullptr)
-        {
-            cout << "null"
-                 << " ";
-            q[(i + 1) % 2].push(nullptr);
-            q[(i + 1) % 2].push(nullptr);
-        }
-        else
-        {
-            q[(i + 1) % 2].push(temp->left);
-            q[(i + 1) % 2].push(temp->right);
-            cout << temp->val << " ";
-        }
-        if (q[i % 2].empty())
-            i++;
+        cout << prefix;
+
+        cout << ((isLeft && hasRight) ? "|-- " : "\\-- ");
+
+        cout << node->val << endl;
+
+        printBT(prefix + (isLeft ? "|   " : "    "), node->left, true, node->right != nullptr);
+        printBT(prefix + (isLeft ? "|   " : "    "), node->right, false, false);
     }
-    cout << endl;
 }
 
 int main()
 {
     TreeNode *root = nullptr;
-    vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    vector<int> nums = {1, 20, 2, 19, 3, 18, 4, 17, 5, 16, 6, 15, 7, 14, 8, 13, 9, 12, 10, 11};
     for (auto i : nums)
         root = insert(root, i);
-    printTree(root);
+    printBT("", root, false, false);
     return 0;
 }
