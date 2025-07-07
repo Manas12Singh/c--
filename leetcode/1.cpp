@@ -112,7 +112,7 @@ public:
     ListNode(int x, int y, ListNode *next) : key(x), val(y), next(next) {}
 }; */
 
-vector<pair<int, int>> d = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+vector<PII> d = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
 #define isqrt(x) floor(sqrt(x))
 /**
@@ -142,29 +142,32 @@ public:
     }
 };
 
-class Solution
+class FindSumPairs
 {
+    vector<int> nums1, nums2;
+
 public:
-    long long countSubarrays(vector<int> &nums, int k)
+    FindSumPairs(vector<int> &nums1, vector<int> &nums2)
     {
-        int n = nums.size();
-        int m = *max_element(nums.begin(), nums.end());
-        int l = 0;
-        int c = 0;
-        long long res = 0;
-        for (int r = 0; r < n; r++)
-        {
-            c += nums[r] == m;
-            while (l < r && c >= k)
-            {
-                c -= nums[l] == m;
-                l++;
-            }
-            res += l;
-        }
-        return res;
+        this->nums1 = nums1;
+        this->nums2 = nums2;
+    }
+
+    void add(int index, int val) { nums2[index] += val; }
+
+    int count(int tot)
+    {
+        find(nums1.begin(),nums1.end(),)
     }
 };
+
+/**
+ * Your FindSumPairs object will be instantiated and called as such:
+ * FindSumPairs* obj = new FindSumPairs(nums1, nums2);
+ * obj->add(index,val);
+ * int param_2 = obj->count(tot);
+ */
+
 int main()
 {
 

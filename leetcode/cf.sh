@@ -1,2 +1,2 @@
 g++ .\\cf.cpp
-cat .\\cf.txt | .\\cf.exe
+cat .\\cf.txt | .\\a.exe
