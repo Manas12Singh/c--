@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
-
+#include <functional>
 using namespace std;
+using namespace std::chrono;
 
 struct TreeNode
 {
@@ -127,49 +128,68 @@ vector<PII> d = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
  * };
  */
 
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+
+/* class Solution
+{
+    vector<int> rows, cols, boxs;
+
+public:
+    void solveSudoku(vector<vector<char>> &board)
+    {
+        rows.resize(9, 0);
+        cols.resize(9, 0);
+        boxs.resize(9, 0);
+        for (int i = 0; i < 9; i++)
+            for (int j = 0; j < 9; j++)
+                if (board[i][j] != '.')
+                {
+                    int box = (i / 3) * 3 + (j / 3);
+                    int k = board[i][j] - '1';
+                    rows[i] |= (1 << k);
+                    cols[j] |= (1 << k);
+                    boxs[box] |= (1 << k);
+                }
+    }
+}; */
+
 class TrieNode
 {
 public:
-    bool isLast;
+    int smallestIndex;
+    int index;
     vector<TrieNode *> next;
-    int count;
 
     TrieNode(int n)
     {
-        isLast = false;
+        smallestIndex = -1;
         next.assign(n, nullptr);
-        count = 0;
+        index = INT_MAX;
     }
 };
 
-class FindSumPairs
+int MOD = 1e7;
+
+class Solution
 {
-    vector<int> nums1, nums2;
-
 public:
-    FindSumPairs(vector<int> &nums1, vector<int> &nums2)
+    vector<long long> minOperations(vector<int> &nums, int k, vector<vector<int>> &queries)
     {
-        this->nums1 = nums1;
-        this->nums2 = nums2;
-    }
-
-    void add(int index, int val) { nums2[index] += val; }
-
-    int count(int tot)
-    {
-        find(nums1.begin(),nums1.end(),)
+        
     }
 };
-
-/**
- * Your FindSumPairs object will be instantiated and called as such:
- * FindSumPairs* obj = new FindSumPairs(nums1, nums2);
- * obj->add(index,val);
- * int param_2 = obj->count(tot);
- */
 
 int main()
 {
-
     return 0;
 }

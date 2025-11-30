@@ -1,16 +1,36 @@
-#target: dependency
-#	command
+# Makefile for context switching demo
+CC = gcc
+NASM = nasm
+CFLAGS = -Wall -g
 
-a.exe: BigInteger.o main.o
-	gcc -o a BigInteger.o check.o
-	make clean
-	a
+# Detect architecture and set appropriate assembly file
+UNAME_M := $(shell uname -m)
+ifeq ($(UNAME_M),x86_64)
+    ASM_FILE = x86_64.s
+    ASM_OBJ = x86_64.o
+    NASM_FORMAT = -f elf64
+else ifeq ($(UNAME_M),armv7l)
+    ASM_FILE = arm.s
+    ASM_OBJ = arm.o
+    NASM_FORMAT = -f elf32
+else ifeq ($(UNAME_M),mips)
+    ASM_FILE = mips.s
+    ASM_OBJ = mips.o
+    NASM_FORMAT = -f elf32
+endif
 
-x86_64.0: x86_64.s
-	nasm x86_64.s
+all: check
 
-BigInteger.o: BigInteger.c
-	gcc -c BigInteger.c
+check: check.o $(ASM_OBJ)
+	$(CC) -o check check.o $(ASM_OBJ)
+
+check.o: check.c
+	$(CC) $(CFLAGS) -c check.c
+
+$(ASM_OBJ): $(ASM_FILE)
+	$(NASM) $(NASM_FORMAT) $(ASM_FILE) -o $(ASM_OBJ)
 
 clean:
-	del BigInteger.o main.o
+	rm -f *.o check
+
+.PHONY: all clean

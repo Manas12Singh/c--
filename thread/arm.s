@@ -1,4 +1,4 @@
-section .text
+.section .text
 
 .global save_context
 save_context:

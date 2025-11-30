@@ -4,53 +4,38 @@
 #include <time.h>
 #include <unistd.h>
 
-#if defined(__x86_64__)
-#include "x86_64.s"
-#elif defined(__arm__)
-#include "arm.s"
-#elif defined(__mips__)
-#include "mips.s"
-#else
-#error "Unsupported architecture"
-#endif
+// Forward declarations for assembly functions
+extern void save_context(void* context);
+extern void restore_context(void* context);
 
 typedef struct
 {
-    void *stack;
-    void *stack_pointer;
-    void *base_pointer;
+    // Context buffer to store CPU state
+    // Size should be enough for all registers
+    char context_data[256];
 } Context;
-
-void save_context(Context *context)
-{
-    asm volatile("save_context" : "=r"(context->stack_pointer), "=r"(context->base_pointer));
-}
-
-void restore_context(Context *context)
-{
-    asm volatile("restore_context" : : "r"(context->stack_pointer), "r"(context->base_pointer));
-}
-
-void func1(int x)
-{
-    while (x < 1000)
-    {
-        if (x == 6)
-            sleep(1000);
-    }
-}
 
 int main()
 {
-    Context c1, c2;
-    void *s1 = malloc(8192);
-    void *s2 = malloc(8192);
-    c1.stack = s1;
-    c2.stack = s2;
+    Context c1;
     int x = 1;
-    save_context(&c1);
-    x++;
-    restore_context(&c1);
-    printf("%d", x);
+    
+    printf("Before save_context: x = %d\n", x);
+    
+    // Save current context
+    static int restored = 0;
+    if (!restored) {
+        save_context(&c1);
+        restored = 1;
+        x++;
+        printf("After increment: x = %d\n", x);
+
+        if (x < 5) {
+            // Only restore a few times to avoid infinite loop
+            restore_context(&c1);
+        }
+    }
+
+    printf("Final: x = %d\n", x);
     return 0;
 }
